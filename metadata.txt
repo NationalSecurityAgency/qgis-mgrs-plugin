@@ -6,7 +6,7 @@ version=3.0.0
 author=C Hamilton
 email=adenaculture@gmail.com
 about=
-    Because of a number of requests, this plugin provides separate MGRS zoom to and capture capabilities separate from the Lat Lon Tools plugin.
+    Because of a number of requests, this plugin provides MGRS zoom to and capture capabilities separate from the Lat Lon Tools plugin.
 tracker=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/issues
 repository=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin
 homepage=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/#readme
