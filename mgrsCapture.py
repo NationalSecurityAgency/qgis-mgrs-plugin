@@ -23,7 +23,7 @@ class MGRSCapture:
         self.mapTool = CopyMgrsTool(self.iface)
 
         # Add Interface for Coordinate Capturing
-        icon = QIcon(os.path.dirname(__file__) + "/images/copyicon.png")
+        icon = QIcon(os.path.dirname(__file__) + "/images/copyMgrs.svg")
         self.copyAction = QAction(icon, "Copy/Display MGRS Coordinate", self.iface.mainWindow())
         self.copyAction.setObjectName('mgrsCopy')
         self.copyAction.triggered.connect(self.startCapture)
@@ -32,7 +32,7 @@ class MGRSCapture:
         self.iface.addPluginToMenu("MGRS", self.copyAction)
 
         # Add Interface for Zoom to Coordinate
-        icon = QIcon(os.path.dirname(__file__) + "/images/zoomicon.png")
+        icon = QIcon(os.path.dirname(__file__) + "/images/zoomToMgrs.svg")
         self.zoomToAction = QAction(icon, "Zoom To MGRS Coordinate", self.iface.mainWindow())
         self.zoomToAction.setObjectName('mgrsZoom')
         self.zoomToAction.triggered.connect(self.showZoomToDialog)
@@ -44,14 +44,14 @@ class MGRSCapture:
         self.zoomToDialog.hide()
 
         # Initialize the Settings Dialog Box
-        settingsicon = QIcon(os.path.dirname(__file__) + '/images/settings.png')
+        settingsicon = QIcon(':/images/themes/default/mActionOptions.svg')
         self.settingsAction = QAction(settingsicon, "Settings", self.iface.mainWindow())
         self.settingsAction.setObjectName('mgrsSettings')
         self.settingsAction.triggered.connect(self.settings)
         self.iface.addPluginToMenu('MGRS', self.settingsAction)
 
         # Help
-        icon = QIcon(os.path.dirname(__file__) + '/images/help.png')
+        icon = QIcon(os.path.dirname(__file__) + '/images/help.svg')
         self.helpAction = QAction(icon, "Help", self.iface.mainWindow())
         self.helpAction.setObjectName('mgrsHelp')
         self.helpAction.triggered.connect(self.help)

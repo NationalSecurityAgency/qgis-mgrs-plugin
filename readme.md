@@ -5,9 +5,9 @@
 
 <div style="text-align:center"><img src="doc/toolbar.jpg" alt="MGRS toolbar"></div>
 
-* <img src="images/copyicon.png" alt="Copy MGRS coordinate"> ***Copy/Display MGRS Coordinate*** - This captures MGRS coordinates onto the clipboard when the user clicks on the map. If snapping is enabled under QGIS ***Project->Snapping Options...*** menu, then *Copy/Display MGRS Coordinate* will snap to any close vector vertices according to the parameters set in the snapping options.
+* <img src="images/copyMgrs.svg" alt="Copy MGRS coordinate"> ***Copy/Display MGRS Coordinate*** - This captures MGRS coordinates onto the clipboard when the user clicks on the map. If snapping is enabled under QGIS ***Project->Snapping Options...*** menu, then *Copy/Display MGRS Coordinate* will snap to any close vector vertices according to the parameters set in the snapping options.
   
-* <img src="images/zoomicon.png" alt="Zoom-to"> ***Zoom to MGRS Coordinate*** - With this tool, type or paste an MGRS coordinate into the text area and press **Enter**. QGIS centers the map on the coordinate, highlights the location and creates a temporary marker at the location. The marker can be removed with the <img src="doc/cleartool.jpg" alt="Clear marker"> button. The following shows the dockable zoom to dialog box.
+* <img src="images/zoomToMgrs.svg" alt="Zoom-to"> ***Zoom to MGRS Coordinate*** - With this tool, type or paste an MGRS coordinate into the text area and press **Enter**. QGIS centers the map on the coordinate, highlights the location and creates a temporary marker at the location. The marker can be removed with the <img src="doc/cleartool.jpg" alt="Clear marker"> button. The following shows the dockable zoom to dialog box.
 
     <div style="text-align:center"><img src="doc/zoomdialog.jpg" alt="Zoom Dialog box"></div>
     

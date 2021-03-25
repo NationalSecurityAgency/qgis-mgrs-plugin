@@ -1,0 +1,62 @@
+<head>
+<style>
+body {
+    font:13.34px helvetica,arial,freesans,clean,sans-serif;
+    color:black;
+    line-height:1.4em;
+    background-color: #F8F8F8;
+    padding: 0.7em;
+}
+pre {
+    margin:1em 0;
+    font-size:12px;
+    background-color:#eee;
+    border:1px solid #ddd;
+    padding:5px;
+    line-height:1.5em;
+    color:#444;
+    overflow:auto;
+    -webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+    padding:0;
+    font-size:12px;
+    background-color:#eee;
+    border:none;
+}
+code {
+    font-size:12px;
+    background-color:#f8f8ff;
+    color:#444;
+    padding:0 .2em;
+    border:1px solid #dedede;
+}
+</style>
+</head>
+<body>
+<h1>MGRS Plugin</h1>
+<p><strong><em>MGRS</em></strong> provides zoom to and coordinate capture ability for MGRS coordinates separate from the <strong><em>Lat Lon Tools</em></strong> plugin. It was produced for users who want separate tools and to be able to have both <strong><em>MGRS</em></strong> and <strong><em>Lat Lon Tools</em></strong> windows displayed at the same time. If you need the ability to convert an attribute table with MGRS coordinates to a new point layer or convert a point layer to a new layer with an MGRS attribute string, then use <strong><em>Lat Lon Tools</em></strong>. These are the MGRS tools as shown on the <strong><em>MGRS toolbar</em></strong>. </p>
+<div style="text-align:center"><img src="doc/toolbar.jpg" alt="MGRS toolbar"></div>
+
+<ul>
+<li>
+<p><img src="images/copyMgrs.svg" alt="Copy MGRS coordinate"> <strong><em>Copy/Display MGRS Coordinate</em></strong> - This captures MGRS coordinates onto the clipboard when the user clicks on the map. If snapping is enabled under QGIS <strong><em>Project-&gt;Snapping Options...</em></strong> menu, then <em>Copy/Display MGRS Coordinate</em> will snap to any close vector vertices according to the parameters set in the snapping options.</p>
+</li>
+<li>
+<p><img src="images/zoomToMgrs.svg" alt="Zoom-to"> <strong><em>Zoom to MGRS Coordinate</em></strong> - With this tool, type or paste an MGRS coordinate into the text area and press <strong>Enter</strong>. QGIS centers the map on the coordinate, highlights the location and creates a temporary marker at the location. The marker can be removed with the <img src="doc/cleartool.jpg" alt="Clear marker"> button. The following shows the dockable zoom to dialog box.</p>
+<p><div style="text-align:center"><img src="doc/zoomdialog.jpg" alt="Zoom Dialog box"></div></p>
+</li>
+</ul>
+<h2>Settings</h2>
+<p>These are the available settings that are available from the QGIS menu <strong><em>Plugins-&gt;MGRS-&gt;Settings</em></strong></p>
+<div style="text-align:center"><img src="doc/settings.jpg" alt="Settings"></div>
+
+<ul>
+<li><strong><em>MGRS precision</em></strong> - This determs the precision of the captured MGRS coordinate. It ranges from 0 to 5 with 5 being the highest resolution.</li>
+<li><strong><em>Coordinate prefix</em></strong> - This text string is added to the beginning of the captured MGRS coordinate.</li>
+<li><strong><em>Coordinate suffix</em></strong> - This text string is added to the end of the captured cMGRS oordinate.</li>
+<li><strong><em>Use persistent zoom to marker</em></strong> - If this is checked, then when you zoom to an MGRS coordinate a persistent marker is displayed until you exit, zoom to another location, or click on the <img src="doc/cleartool.jpg" alt="Clear marker"> button.</li>
+<li><strong><em>Show marker on QGIS map at the captured location</em></strong> - If checked, a temporary marker will be displayed at the location clicked on with the <strong><em>Copy/Display MGRS Coordinate</em></strong> tool.</li>
+</ul></body>

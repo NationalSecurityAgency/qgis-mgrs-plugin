@@ -2,17 +2,19 @@
 name=MGRS Tools
 qgisMinimumVersion=3.2
 description=Tools to capture and zoom to MGRS coordinates.
-version=3.0.0
+version=3.0.1
 author=C Hamilton
 email=adenaculture@gmail.com
 about=
-    Because of a number of requests, this plugin provides MGRS zoom to and capture capabilities separate from the Lat Lon Tools plugin.
+    This plugin provides MGRS zoom to and capture capabilities derived from the Lat Lon Tools plugin. Because of user requests to have separate MGRS zoom to and capture capabilities, this plugin was created.
 tracker=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/issues
 repository=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin
 homepage=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/#readme
 tags=coordinate,capture,zoom,move to,mgrs
 category=Plugins
-icon=images/copyicon.png
+icon=icon.png
 experimental=False
 deprecated=False
-# changelog=
+changelog=
+    3.0.1 - Update icons
+    3.0.0 - Initial release
