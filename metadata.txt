@@ -1,20 +1,21 @@
 [general]
 name=MGRS Tools
-qgisMinimumVersion=3.2
-description=Tools to capture and zoom to MGRS coordinates.
-version=3.0.1
+qgisMinimumVersion=3.4
+description=Tools to capture and zoom to MGRS coordinates and create a grid zone designator layer.
+version=3.0.2
 author=C Hamilton
 email=adenaculture@gmail.com
 about=
-    This plugin provides MGRS zoom to and capture capabilities derived from the Lat Lon Tools plugin. Because of user requests to have separate MGRS zoom to and capture capabilities, this plugin was created.
+    This plugin provides MGRS zoom to and capture capabilities derived from the Lat Lon Tools plugin. Because of user requests to have separate MGRS zoom to and capture capabilities, this plugin was created. It also creates an MGRS Grid Zone Designator overlay layer.
 tracker=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/issues
 repository=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin
 homepage=https://github.com/NationalSecurityAgency/qgis-mgrs-plugin/#readme
-tags=coordinate,capture,zoom,move to,mgrs
+tags=coordinate,capture,zoom,move to,mgrs,grid zone designator,gzd
 category=Plugins
 icon=icon.png
 experimental=False
 deprecated=False
 changelog=
+    3.0.2 - Add an MGRS grid zone designator overlay layer algorithm.
     3.0.1 - Update icons
     3.0.0 - Initial release
