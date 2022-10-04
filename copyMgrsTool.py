@@ -4,7 +4,7 @@ from qgis.PyQt.QtWidgets import QApplication
 from qgis.core import Qgis, QgsCoordinateTransform, QgsPointXY, QgsProject, QgsSettings
 from qgis.gui import QgsMapToolEmitPoint, QgsVertexMarker
 
-from .settings import settings, epsg4326
+from .settings import settings, epsg4326, formatMgrsString
 from . import mgrs
 # import traceback
 
@@ -43,6 +43,7 @@ class CopyMgrsTool(QgsMapToolEmitPoint):
             pt4326 = transform.transform(pt.x(), pt.y())
         try:
             msg = mgrs.toMgrs(pt4326.y(), pt4326.x(), settings.mgrsPrecision)
+            msg = formatMgrsString(msg, settings.addSpaces)
         except Exception:
             # traceback.print_exc()
             msg = None

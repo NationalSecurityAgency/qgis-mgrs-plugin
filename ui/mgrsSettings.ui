@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>349</width>
-    <height>192</height>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Lat Lon Settings</string>
+   <string>MGRS Settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -56,7 +56,50 @@
        </property>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>GZD line color</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QgsColorButton" name="lineColorButton">
+       <property name="color">
+        <color>
+         <red>1</red>
+         <green>1</green>
+         <blue>1</blue>
+        </color>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>GZD font color</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QgsColorButton" name="fontColorButton">
+       <property name="color">
+        <color>
+         <red>1</red>
+         <green>1</green>
+         <blue>1</blue>
+        </color>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="addSpacesCheckBox">
+     <property name="text">
+      <string>Add spaces to MGRS coordinates</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="markerCheckBox">
@@ -100,6 +143,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsColorButton</class>
+   <extends>QToolButton</extends>
+   <header>qgscolorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

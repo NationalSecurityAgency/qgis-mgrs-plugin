@@ -2,6 +2,7 @@ import os
 from qgis.PyQt.uic import loadUiType
 from qgis.PyQt.QtWidgets import QDialog, QDialogButtonBox
 from qgis.PyQt.QtCore import QSettings, Qt
+from qgis.PyQt.QtGui import QColor
 from qgis.core import QgsCoordinateReferenceSystem
 
 
@@ -10,6 +11,22 @@ FORM_CLASS, _ = loadUiType(os.path.join(
 
 epsg4326 = QgsCoordinateReferenceSystem('EPSG:4326')
 
+
+def formatMgrsString(mgrs, add_spaces=False):
+    if add_spaces:
+        gzd = mgrs[0:3].strip()
+        gsid = mgrs[3:5]
+        ns = mgrs[5:].strip()
+        if len(mgrs) > 5:
+            l = int(len(ns) / 2)
+            easting = ns[0:l]
+            northing = ns[l:]
+            s = '{} {} {} {}'.format(gzd, gsid, easting, northing)
+        else:
+            s = '{} {}'.format(gzd, gsid)
+        return(s)
+    else:
+        return(mgrs.strip())
 
 class Settings():
     def __init__(self):
@@ -26,6 +43,9 @@ class Settings():
         self.mgrsSuffix = qset.value('/MGRS/Suffix', '')
         self.showLocation = int(qset.value('/MGRS/ShowLocation', Qt.Unchecked))
         self.persistentMarker = int(qset.value('/MGRS/PersistentMarker', Qt.Checked))
+        self.addSpaces = int(qset.value('/MGRS/AddSpaces', Qt.Unchecked))
+        self.lineColor = QColor(qset.value('/MGRS/LineColor', '#000000'))
+        self.fontColor = QColor(qset.value('/MGRS/FontColor', '#000000'))
 
 settings = Settings()
 
@@ -47,6 +67,10 @@ class SettingsWidget(QDialog, FORM_CLASS):
         self.suffixLineEdit.setText('')
         self.markerCheckBox.setCheckState(Qt.Unchecked)
         self.persistentMarkerCheckBox.setCheckState(Qt.Checked)
+        self.addSpacesCheckBox.setCheckState(Qt.Unchecked)
+        color = QColor('#000000')
+        self.lineColorButton.setColor(color)
+        self.fontColorButton.setColor(color)
 
     def accept(self):
         '''Accept the settings and save them for next time.'''
@@ -56,6 +80,11 @@ class SettingsWidget(QDialog, FORM_CLASS):
         qset.setValue('/MGRS/Suffix', self.suffixLineEdit.text())
         qset.setValue('/MGRS/ShowLocation', self.markerCheckBox.checkState())
         qset.setValue('/MGRS/PersistentMarker', self.persistentMarkerCheckBox.checkState())
+        qset.setValue('/MGRS/AddSpaces', self.addSpacesCheckBox.checkState())
+        color = self.lineColorButton.color()
+        qset.setValue('/MGRS/LineColor', color.name())
+        color = self.fontColorButton.color()
+        qset.setValue('/MGRS/FontColor', color.name())
 
         # The values have been read from the widgets and saved to the registry.
         # Now we will read them back to the variables.
@@ -72,3 +101,6 @@ class SettingsWidget(QDialog, FORM_CLASS):
         self.suffixLineEdit.setText(settings.mgrsSuffix)
         self.markerCheckBox.setCheckState(settings.showLocation)
         self.persistentMarkerCheckBox.setCheckState(settings.persistentMarker)
+        self.addSpacesCheckBox.setCheckState(settings.addSpaces)
+        self.lineColorButton.setColor(settings.lineColor)
+        self.fontColorButton.setColor(settings.fontColor)

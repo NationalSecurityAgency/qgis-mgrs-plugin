@@ -1,6 +1,10 @@
 from qgis.PyQt.QtCore import Qt, QUrl
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction
+from qgis.core import QgsApplication
+import processing
+
+from .provider import MGRSProvider
 
 from .zoomToMgrs import ZoomToMgrs
 from .copyMgrsTool import CopyMgrsTool
@@ -15,6 +19,7 @@ class MGRSCapture:
         self.canvas = iface.mapCanvas()
         self.toolbar = self.iface.addToolBar('MGRS Toolbar')
         self.toolbar.setObjectName('MGRSToolbar')
+        self.provider = MGRSProvider()
 
     def initGui(self):
         '''Initialize Lot Lon Tools GUI.'''
@@ -42,6 +47,12 @@ class MGRSCapture:
         self.zoomToDialog = ZoomToMgrs(self.iface, self.iface.mainWindow())
         self.iface.addDockWidget(Qt.LeftDockWidgetArea, self.zoomToDialog)
         self.zoomToDialog.hide()
+        
+        # MGRS Grid Zone Designator
+        icon = QIcon(':/images/themes/default/processingAlgorithm.svg')
+        self.gzdAction = QAction(icon, "MGRS Grid Zone Designator", self.iface.mainWindow())
+        self.gzdAction.triggered.connect(self.gzd)
+        self.iface.addPluginToMenu("MGRS", self.gzdAction)
 
         # Initialize the Settings Dialog Box
         settingsicon = QIcon(':/images/themes/default/mActionOptions.svg')
@@ -59,6 +70,9 @@ class MGRSCapture:
 
         self.canvas.mapToolSet.connect(self.resetTools)
 
+        # Add the processing provider
+        QgsApplication.processingRegistry().addProvider(self.provider)
+
     def resetTools(self, newtool, oldtool):
         '''Uncheck the Copy MGRS tool'''
         try:
@@ -75,6 +89,7 @@ class MGRSCapture:
         self.canvas.unsetMapTool(self.mapTool)
         self.iface.removePluginMenu('MGRS', self.copyAction)
         self.iface.removePluginMenu('MGRS', self.zoomToAction)
+        self.iface.removePluginMenu('MGRS', self.gzdAction)
         self.iface.removePluginMenu('MGRS', self.settingsAction)
         self.iface.removePluginMenu('MGRS', self.helpAction)
         self.iface.removeDockWidget(self.zoomToDialog)
@@ -86,6 +101,7 @@ class MGRSCapture:
         self.zoomToDialog = None
         self.settingsDialog = None
         self.mapTool = None
+        QgsApplication.processingRegistry().removeProvider(self.provider)
 
     def startCapture(self):
         '''Set the focus of the copy coordinate tool'''
@@ -94,6 +110,9 @@ class MGRSCapture:
     def showZoomToDialog(self):
         '''Show the zoom to docked widget.'''
         self.zoomToDialog.show()
+
+    def gzd(self):
+        processing.execAlgorithmDialog('mgrs:mgrsgzd', {})
 
     def settings(self):
         '''Show the settings dialog box'''
