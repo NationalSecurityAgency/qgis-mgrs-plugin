@@ -31,7 +31,7 @@ These are the settings that are available from the QGIS menu ***Plugins->MGRS->S
 
 <div style="text-align:center"><img src="doc/settings.jpg" alt="Settings"></div>
 
-* ***MGRS precision*** - This determs the precision of the captured MGRS coordinate. It ranges from 0 to 5 with 5 being the highest resolution.
+* ***MGRS precision*** - This determines the precision of the captured MGRS coordinate. It ranges from 0 to 5 with 5 being the highest resolution.
 * ***Coordinate prefix*** - This text string is added to the beginning of the captured MGRS coordinate.
 * ***Coordinate suffix*** - This text string is added to the end of the captured MGRS oordinate.
 * ***GZD line color*** - This is the outline color used when the MGRS Grid Zone Designator algorithm is executed.
