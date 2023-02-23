@@ -108,7 +108,7 @@ class MgrsGzdAlgorithm(QgsProcessingAlgorithm):
         return {self.PrmOutput: dest_id}
 
     def exportPolygon(self, sink, lon, lat, width, height, gzd):
-        rect = QgsRectangle(lon, lat, lon+width, lat+height, False)
+        rect = QgsRectangle(lon, lat, lon+width, lat+height)
         f = QgsFeature()
         f.setGeometry(QgsGeometry.fromRect(rect))
         f.setAttributes([gzd])
