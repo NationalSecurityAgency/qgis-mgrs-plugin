@@ -18,6 +18,7 @@ from .provider import MGRSProvider
 
 from .zoomToMgrs import ZoomToMgrs
 from .copyMgrsTool import CopyMgrsTool
+from .mgrsGeomGenerator import MgrsGeomGenerator
 from .settings import SettingsWidget
 import os
 import webbrowser
@@ -57,6 +58,17 @@ class MGRSCapture:
         self.zoomToDialog = ZoomToMgrs(self.iface, self.iface.mainWindow())
         self.iface.addDockWidget(Qt.LeftDockWidgetArea, self.zoomToDialog)
         self.zoomToDialog.hide()
+
+        # Add Interface for MGRS coordinate digitizer
+        icon = QIcon(os.path.dirname(__file__) + "/images/zoomToMgrs.svg")
+        self.geomGenAction = QAction("MGRS Geometry Generator", self.iface.mainWindow())
+        self.geomGenAction.setObjectName('mgrsGeomGenerator')
+        self.geomGenAction.triggered.connect(self.showGeometryGenerator)
+        # self.toolbar.addAction(self.geomGenAction)
+        self.iface.addPluginToMenu('MGRS', self.geomGenAction)
+
+        self.geomGenDialog = MgrsGeomGenerator(self.iface, self.iface.mainWindow())
+        self.geomGenDialog.hide()
         
         # MGRS Grid Zone Designator
         icon = QIcon(':/images/themes/default/processingAlgorithm.svg')
@@ -99,6 +111,7 @@ class MGRSCapture:
         self.canvas.unsetMapTool(self.mapTool)
         self.iface.removePluginMenu('MGRS', self.copyAction)
         self.iface.removePluginMenu('MGRS', self.zoomToAction)
+        self.iface.removePluginMenu('MGRS', self.geomGenAction)
         self.iface.removePluginMenu('MGRS', self.gzdAction)
         self.iface.removePluginMenu('MGRS', self.settingsAction)
         self.iface.removePluginMenu('MGRS', self.helpAction)
@@ -108,6 +121,7 @@ class MGRSCapture:
         self.iface.removeToolBarIcon(self.zoomToAction)
         del self.toolbar
 
+        self.geomGenDialog = None
         self.zoomToDialog = None
         self.settingsDialog = None
         self.mapTool = None
@@ -120,6 +134,10 @@ class MGRSCapture:
     def showZoomToDialog(self):
         '''Show the zoom to docked widget.'''
         self.zoomToDialog.show()
+
+    def showGeometryGenerator(self):
+        '''Show geometry generator dialog.'''
+        self.geomGenDialog.show()
 
     def gzd(self):
         processing.execAlgorithmDialog('mgrs:mgrsgzd', {})
