@@ -10,6 +10,7 @@
 """
 import os
 import re
+from geographiclib.geodesic import Geodesic
 
 from qgis.PyQt.QtWidgets import QDialog, QDialogButtonBox
 from qgis.PyQt.QtCore import QVariant
@@ -32,6 +33,7 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
         # self.buttonBox.button(QDialogButtonBox.Reset).setText("Clear")
 
     def accept(self):
+        geod = Geodesic.WGS84
         mode = self.modeComboBox.currentIndex()
         pts = []
         mgs = []
@@ -69,19 +71,45 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
             if len(pts) < 2:
                 self.iface.messageBar().pushMessage("", "There must be 2 or more coodinates for a line", level=Qgis.Warning, duration=4)
                 return
+            # Calculate the line distance in meters
+            pt1 = pts[0]
+            distance = 0
+            for i in range(1, len(pts)):
+                pt2 = pts[i]
+                l = geod.Inverse(pt1.y(), pt1.x(), pt2.y(), pt2.x())
+                distance += l['s12']
             layer = QgsVectorLayer("LineString?crs={}".format(epsg4326.authid()), "MGRS Line", "memory")
             dp = layer.dataProvider()
+            attr = [QgsField('distance', QVariant.Double)]
+            dp.addAttributes(attr)
+            layer.updateFields()
             f = QgsFeature()
             f.setGeometry(QgsGeometry.fromPolylineXY(pts))
+            f.setAttributes([distance])
             dp.addFeatures([f])
         elif mode == 2:  # Polygon
-            if len(pts) < 3:
-                self.iface.messageBar().pushMessage("", "There must be 3 or more coodinates for a polygon", level=Qgis.Warning, duration=4)
+            if len(pts) < 2:
+                self.iface.messageBar().pushMessage("", "There must be 2 or more coodinates for a polygon", level=Qgis.Warning, duration=4)
                 return
+            # Check to see if the polygon is closed. If it isn't close it.
+            if mgs[0] != mgs[len(mgs)-1]:
+                mgs.append(mgs[0])
+                pts.append(pts[0])
+                
+            pt1 = pts[0]
+            distance = 0
+            for i in range(1, len(pts)):
+                pt2 = pts[i]
+                l = geod.Inverse(pt1.y(), pt1.x(), pt2.y(), pt2.x())
+                distance += l['s12']
             layer = QgsVectorLayer("Polygon?crs={}".format(epsg4326.authid()), "MGRS Polygon", "memory")
             dp = layer.dataProvider()
+            attr = [QgsField('perimeter', QVariant.Double)]
+            dp.addAttributes(attr)
+            layer.updateFields()
             f = QgsFeature()
             f.setGeometry(QgsGeometry.fromPolygonXY([pts]))
+            f.setAttributes([distance])
             dp.addFeatures([f])
         else:  # Minimum bounding box
             if len(pts) < 2:
