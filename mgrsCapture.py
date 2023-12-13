@@ -59,12 +59,12 @@ class MGRSCapture:
         self.iface.addDockWidget(Qt.LeftDockWidgetArea, self.zoomToDialog)
         self.zoomToDialog.hide()
 
-        # Add Interface for MGRS coordinate digitizer
-        icon = QIcon(os.path.dirname(__file__) + "/images/zoomToMgrs.svg")
-        self.geomGenAction = QAction("MGRS Geometry Generator", self.iface.mainWindow())
+        # Add Interface for MGRS geometry gnerator
+        icon = QIcon(os.path.dirname(__file__) + "/images/mgrsGeom.svg")
+        self.geomGenAction = QAction(icon, "MGRS Geometry Generator", self.iface.mainWindow())
         self.geomGenAction.setObjectName('mgrsGeomGenerator')
         self.geomGenAction.triggered.connect(self.showGeometryGenerator)
-        # self.toolbar.addAction(self.geomGenAction)
+        self.toolbar.addAction(self.geomGenAction)
         self.iface.addPluginToMenu('MGRS', self.geomGenAction)
 
         self.geomGenDialog = MgrsGeomGenerator(self.iface, self.iface.mainWindow())
@@ -119,6 +119,7 @@ class MGRSCapture:
         # Remove Toolbar Icons
         self.iface.removeToolBarIcon(self.copyAction)
         self.iface.removeToolBarIcon(self.zoomToAction)
+        self.iface.removeToolBarIcon(self.geomGenAction)
         del self.toolbar
 
         self.geomGenDialog = None
