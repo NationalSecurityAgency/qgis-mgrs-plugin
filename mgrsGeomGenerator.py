@@ -11,6 +11,7 @@
 import os
 import re
 from geographiclib.geodesic import Geodesic
+from geographiclib.polygonarea import PolygonArea
 
 from qgis.PyQt.QtWidgets import QDialog, QDialogButtonBox
 from qgis.PyQt.QtCore import QVariant
@@ -96,20 +97,18 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
                 mgs.append(mgs[0])
                 pts.append(pts[0])
                 
-            pt1 = pts[0]
-            distance = 0
-            for i in range(1, len(pts)):
-                pt2 = pts[i]
-                l = geod.Inverse(pt1.y(), pt1.x(), pt2.y(), pt2.x())
-                distance += l['s12']
+            poly = PolygonArea(geod)
+            for i in range(len(pts)):
+                poly.AddPoint(pts[i].y(), pts[i].x())
+            s = poly.Compute()
             layer = QgsVectorLayer("Polygon?crs={}".format(epsg4326.authid()), "MGRS Polygon", "memory")
             dp = layer.dataProvider()
-            attr = [QgsField('perimeter', QVariant.Double)]
+            attr = [QgsField('perimeter', QVariant.Double), QgsField('area', QVariant.Double)]
             dp.addAttributes(attr)
             layer.updateFields()
             f = QgsFeature()
             f.setGeometry(QgsGeometry.fromPolygonXY([pts]))
-            f.setAttributes([distance])
+            f.setAttributes([s[1],abs(s[2])])
             dp.addFeatures([f])
         else:  # Minimum bounding box
             if len(pts) < 2:
@@ -120,7 +119,9 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
             attr = [QgsField('min_lon', QVariant.Double),
                 QgsField('min_lat', QVariant.Double),
                 QgsField('max_lon', QVariant.Double),
-                QgsField('max_lat', QVariant.Double)]
+                QgsField('max_lat', QVariant.Double),
+                QgsField('perimeter', QVariant.Double),
+                QgsField('area', QVariant.Double)]
             dp.addAttributes(attr)
             layer.updateFields()
             minx = miny = 9999
@@ -143,8 +144,12 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
                 QgsPointXY(maxx, miny),
                 QgsPointXY(minx, miny)
             ]
+            poly = PolygonArea(geod)
+            for i in range(len(bbox)):
+                poly.AddPoint(bbox[i].y(), bbox[i].x())
+            s = poly.Compute(reverse=True)
             f = QgsFeature()
-            f.setAttributes([minx, miny, maxx, maxy])
+            f.setAttributes([minx, miny, maxx, maxy, s[1], s[2]])
             f.setGeometry(QgsGeometry.fromPolygonXY([bbox]))
             dp.addFeatures([f])
 
