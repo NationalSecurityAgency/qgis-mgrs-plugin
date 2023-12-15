@@ -103,12 +103,16 @@ class MgrsGeomGenerator(QDialog, FORM_CLASS):
             s = poly.Compute()
             layer = QgsVectorLayer("Polygon?crs={}".format(epsg4326.authid()), "MGRS Polygon", "memory")
             dp = layer.dataProvider()
-            attr = [QgsField('perimeter', QVariant.Double), QgsField('area', QVariant.Double)]
+            attr = [QgsField('perimeter', QVariant.Double),
+                QgsField('area', QVariant.Double),
+                QgsField('valid_geom', QVariant.Bool)]
             dp.addAttributes(attr)
             layer.updateFields()
             f = QgsFeature()
-            f.setGeometry(QgsGeometry.fromPolygonXY([pts]))
-            f.setAttributes([s[1],abs(s[2])])
+            geom = QgsGeometry.fromPolygonXY([pts])
+            valid = geom.isGeosValid()
+            f.setGeometry(geom)
+            f.setAttributes([s[1],abs(s[2]), valid])
             dp.addFeatures([f])
         else:  # Minimum bounding box
             if len(pts) < 2:
