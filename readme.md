@@ -1,6 +1,6 @@
 # MGRS Plugin
 
-***MGRS*** provides zoom to and coordinate capture ability for MGRS coordinates separate from the ***Lat Lon Tools*** plugin. It was produced for users who want separate tools and to be able to have both ***MGRS*** and ***Lat Lon Tools*** windows displayed at the same time. It also provides an algorithm to create an MGRS Grid Zone Designator layer. If you need the ability to convert an attribute table with MGRS coordinates to a new point layer or convert a point layer to a new layer with an MGRS attribute string, then use ***Lat Lon Tools***. The MGRS plugin is installed in the QGIS Plugins menu.
+***MGRS*** provides zoom to and coordinate capture ability for MGRS coordinates separate from the ***Lat Lon Tools*** plugin. It was produced for users who want separate tools and to be able to have both ***MGRS*** and ***Lat Lon Tools*** windows displayed at the same time. Given a set of MGRS coordinates it provide a tool to display them as points, a line, a polygon, or a bounding box around them. It also provides an algorithm to create an MGRS Grid Zone Designator layer. If you need the ability to convert an attribute table with MGRS coordinates to a new point layer or convert a point layer to a new layer with an MGRS attribute string, then use ***Lat Lon Tools***. The MGRS plugin is installed in the QGIS Plugins menu.
 
 <div style="text-align:center"><img src="doc/menu.jpg" alt="MGRS menu"></div>
 
@@ -13,6 +13,10 @@ These are the MGRS tools as shown on the ***MGRS toolbar***.
 * <img src="images/zoomToMgrs.svg" alt="Zoom-to"> ***Zoom to MGRS Coordinate*** - With this tool, type or paste an MGRS coordinate into the text area and press **Enter**. QGIS centers the map on the coordinate, highlights the location and creates a temporary marker at the location. The marker can be removed with the <img src="doc/cleartool.jpg" alt="Clear marker"> button. The following shows the dockable zoom to dialog box.
 
     <div style="text-align:center"><img src="doc/zoomdialog.jpg" alt="Zoom Dialog box"></div>
+
+* <img src="images/mgrsGeom.svg" alt="Zoom-to"> ***MGRS Geometry Generator*** - This provides a text box area to paste in MGRS coordiates. The user has the options to display these as points, a line, a polygon, or a bounding box that encloses all the points. Here is the dialog box. The choices for the drop down menu next to ***Render as...*** are ***Points***, ***Lines***, ***Polygons***, and ***Bounding Box***.
+
+    <div style="text-align:center"><img src="doc/mgrs_geom1.jpg" alt="Geometry Generator Dialog box"></div>
 
 * <img src="doc/gzd.jpg" width="24" alt="MGRS Grid Zone Designator"> ***MGRS Grid Zone Designator*** - This will create an MGRS Grid Zone Designator overlay layer.
 
