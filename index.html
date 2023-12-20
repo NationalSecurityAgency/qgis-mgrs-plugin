@@ -37,7 +37,7 @@ code {
 </head>
 <body>
 <h1>MGRS Plugin</h1>
-<p><strong><em>MGRS</em></strong> provides zoom to and coordinate capture ability for MGRS coordinates separate from the <strong><em>Lat Lon Tools</em></strong> plugin. It was produced for users who want separate tools and to be able to have both <strong><em>MGRS</em></strong> and <strong><em>Lat Lon Tools</em></strong> windows displayed at the same time. It also provides an algorithm to create an MGRS Grid Zone Designator layer. If you need the ability to convert an attribute table with MGRS coordinates to a new point layer or convert a point layer to a new layer with an MGRS attribute string, then use <strong><em>Lat Lon Tools</em></strong>. The MGRS plugin is installed in the QGIS Plugins menu.</p>
+<p><strong><em>MGRS</em></strong> provides zoom to and coordinate capture ability for MGRS coordinates separate from the <strong><em>Lat Lon Tools</em></strong> plugin. It was produced for users who want separate tools and to be able to have both <strong><em>MGRS</em></strong> and <strong><em>Lat Lon Tools</em></strong> windows displayed at the same time. Given a set of MGRS coordinates, the <strong><em>MGRS Geometry Generator</em></strong> tool displays the coordinates as points, line, polygon, or a bounding box around them. It also provides an algorithm to create an MGRS Grid Zone Designator layer. If you need the ability to convert an attribute table with MGRS coordinates to a new point layer or convert a point layer to a new layer with an MGRS attribute string, then use <strong><em>Lat Lon Tools</em></strong>. The MGRS plugin is installed in the QGIS Plugins menu.</p>
 <div style="text-align:center"><img src="doc/menu.jpg" alt="MGRS menu"></div>
 
 <p>These are the MGRS tools as shown on the <strong><em>MGRS toolbar</em></strong>. </p>
@@ -50,6 +50,10 @@ code {
 <li>
 <p><img src="images/zoomToMgrs.svg" alt="Zoom-to"> <strong><em>Zoom to MGRS Coordinate</em></strong> - With this tool, type or paste an MGRS coordinate into the text area and press <strong>Enter</strong>. QGIS centers the map on the coordinate, highlights the location and creates a temporary marker at the location. The marker can be removed with the <img src="doc/cleartool.jpg" alt="Clear marker"> button. The following shows the dockable zoom to dialog box.</p>
 <p><div style="text-align:center"><img src="doc/zoomdialog.jpg" alt="Zoom Dialog box"></div></p>
+</li>
+<li>
+<p><img src="images/mgrsGeom.svg" alt="Geometry generator"> <strong><em>MGRS Geometry Generator</em></strong> - This provides a text box to paste in MGRS coordinates. The user has the options to display these as points, a line, a polygon, or a bounding box that encloses all the points. Here is the dialog box. The choices for the drop down menu next to <strong><em>Render as...</em></strong> are <strong><em>Points</em></strong>, <strong><em>Line</em></strong>, <strong><em>Polygon</em></strong>, and <strong><em>Bounding Box</em></strong>. The <strong><em>MGRS Points</em></strong> layer attributes include the input MGRS coordinate as well as longitude and latitude. The <strong><em>MGRS Line</em></strong> layer attributes include the geodesic distance in meters of the line. The <strong><em>MGRS Polygon</em></strong> layer attributes include the geodesic perimeter in meters, its area in meters^2 and whether the polygon has a valid geometry or not. The parameters for the <strong><em>MGRS Bounding Box</em></strong> includes the minimum and maximum latitude and longitudes, the geodesic perimeter in meters and the geodesic area in meters^2.</p>
+<p><div style="text-align:center"><img src="doc/mgrs_geom1.jpg" alt="Geometry Generator Dialog box"></div></p>
 </li>
 <li>
 <p><img src="doc/gzd.jpg" width="24" alt="MGRS Grid Zone Designator"> <strong><em>MGRS Grid Zone Designator</em></strong> - This will create an MGRS Grid Zone Designator overlay layer.</p>
@@ -69,10 +73,11 @@ code {
 <ul>
 <li><strong><em>MGRS precision</em></strong> - This determines the precision of the captured MGRS coordinate. It ranges from 0 to 5 with 5 being the highest resolution.</li>
 <li><strong><em>Coordinate prefix</em></strong> - This text string is added to the beginning of the captured MGRS coordinate.</li>
-<li><strong><em>Coordinate suffix</em></strong> - This text string is added to the end of the captured MGRS oordinate.</li>
+<li><strong><em>Coordinate suffix</em></strong> - This text string is added to the end of the captured MGRS coordinate.</li>
 <li><strong><em>GZD line color</em></strong> - This is the outline color used when the MGRS Grid Zone Designator algorithm is executed.</li>
 <li><strong><em>GZD font color</em></strong> - This is the font color used for the grid zone labels when the MGRS Grid Zone Designator algorithm is executed.</li>
 <li><strong><em>Add spaces to MGRS coordinates</em></strong> - This will add spaces to an MGRS coordinate when checked. Unchecked it looks like "16TDL8016526461" and checked it looks like "16T DL 80165 26461".</li>
 <li><strong><em>Use persistent zoom to marker</em></strong> - If this is checked, then when you zoom to an MGRS coordinate a persistent marker is displayed until you exit, zoom to another location, or click on the <img src="doc/cleartool.jpg" alt="Clear marker"> button.</li>
 <li><strong><em>Show marker on QGIS map at the captured location</em></strong> - If checked, a temporary marker will be displayed at the location clicked on with the <strong><em>Copy/Display MGRS Coordinate</em></strong> tool.</li>
-</ul></body>
+</ul>
+</body>
