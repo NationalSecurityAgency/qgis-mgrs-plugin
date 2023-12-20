@@ -1,7 +1,7 @@
 PLUGINNAME = mgrs
 PLUGINS = "$(HOME)"/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/$(PLUGINNAME)
 PY_FILES = __init__.py copyMgrsTool.py mgrs.py mgrsCapture.py mgrsgzd.py provider.py settings.py zoomToMgrs.py
-EXTRAS = metadata.txt icon.png
+EXTRAS = metadata.txt icon.png LICENSE
 
 deploy:
 	mkdir -p $(PLUGINS)
