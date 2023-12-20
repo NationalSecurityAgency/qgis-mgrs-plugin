@@ -42,12 +42,12 @@
        </item>
        <item>
         <property name="text">
-         <string>Lines</string>
+         <string>Line</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Polygons</string>
+         <string>Polygon</string>
         </property>
        </item>
        <item>
